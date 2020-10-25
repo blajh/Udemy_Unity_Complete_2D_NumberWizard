@@ -9,14 +9,12 @@ public class NumberWizard : MonoBehaviour
     private int guessCount = 0;
     private int guess;
 
-    // Start is called before the first frame update
     void Start()
     {
         WelcomeMessage();
         TakeNumber();
     }
 
-    // Update is called once per frame
     void Update()
     {
         ListenForInput();

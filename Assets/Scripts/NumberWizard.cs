@@ -24,7 +24,6 @@ public class NumberWizard : MonoBehaviour
 
     private void WelcomeMessage() {
         Debug.Log("Welcome to Number Wizard!");
-
     }
 
 	private void TakeNumber() {

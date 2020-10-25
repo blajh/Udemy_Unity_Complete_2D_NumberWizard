@@ -40,9 +40,11 @@ public class NumberWizard : MonoBehaviour
     }
 
 	private void CalculateGuess() {
-        if (minNumber == 999 && maxNumber == 1000) { //account for odd / 2 integer rounding
+        //account for odd / 2 integer rounding
+        if (minNumber == 999 && maxNumber == 1000) { 
             maxNumber++;
         }
+		//although this would normally be enough
         guess = (minNumber + maxNumber) / 2;
         StateGuess();
 	}

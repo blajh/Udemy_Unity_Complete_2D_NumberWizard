@@ -37,13 +37,14 @@ public class NumberWizard : MonoBehaviour
     private void MakeGuess() {
         guessCount++;
         CalculateGuess();
-        Debug.Log("My guess number " + guessCount + " is: " + guess);
-        Debug.Log("Is your number higher or lower?");
-        Debug.Log("Press Up = Higer, Press Down = Lower, Enter = Correct.");
     }
 
 	private void CalculateGuess() {
+        if (minNumber == 999 && maxNumber == 1000) { //account for odd / 2 integer rounding
+            maxNumber++;
+        }
         guess = (minNumber + maxNumber) / 2;
+        StateGuess();
 	}
 
 	private void ListenForInput() {
@@ -81,5 +82,11 @@ public class NumberWizard : MonoBehaviour
         minNumber = 1;
         guessCount = 0;
         TakeNumber();
+    }
+
+    private void StateGuess() {
+        Debug.Log("My guess number " + guessCount + " is: " + guess);
+        Debug.Log("Is your number higher or lower?");
+        Debug.Log("Press Up = Higer, Press Down = Lower, Enter = Correct.");
     }
 }

@@ -6,32 +6,20 @@ public class NumberWizard : MonoBehaviour
 {
     private int maxNumber = 1000;
     private int minNumber = 1;
-    private int guess;
     private int guessCount = 0;
-    private int pickedNumber;
+    private int guess;
 
     // Start is called before the first frame update
     void Start()
     {
         WelcomeMessage();
         TakeNumber();
-        MakeGuess();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            Higher();
-		}
-
-		else if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            Lower();
-        }
-
-        else if (Input.GetKeyDown(KeyCode.Return)) {
-            Correct();
-        }
+        ListenForInput();
     }
 
     private void WelcomeMessage() {
@@ -43,10 +31,10 @@ public class NumberWizard : MonoBehaviour
         Debug.Log("Please pick a number between");
         Debug.Log("Minimally " + minNumber + " and");
         Debug.Log("Maximally " + maxNumber + ":");
-
+        MakeGuess();
     }
 
-	private void MakeGuess() {
+    private void MakeGuess() {
         guessCount++;
         CalculateGuess();
         Debug.Log("My guess number " + guessCount + " is: " + guess);
@@ -57,6 +45,20 @@ public class NumberWizard : MonoBehaviour
 	private void CalculateGuess() {
         guess = (minNumber + maxNumber) / 2;
 	}
+
+	private void ListenForInput() {
+        if (Input.GetKeyDown(KeyCode.UpArrow)) {
+            Higher();
+        }
+
+        else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            Lower();
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Return)) {
+            Correct();
+        }
+    }
 
 	private void Higher() {
         Debug.Log("You pressed Up, which means Higher.");
@@ -75,8 +77,9 @@ public class NumberWizard : MonoBehaviour
         Debug.Log("Happy to have guessed right.");
         Debug.Log("============================");
 
-        minNumber = 1;
         maxNumber = 1000;
+        minNumber = 1;
+        guessCount = 0;
         TakeNumber();
     }
 }

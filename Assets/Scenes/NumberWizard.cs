@@ -6,37 +6,77 @@ public class NumberWizard : MonoBehaviour
 {
     private int maxNumber = 1000;
     private int minNumber = 1;
-    public int pickedNumber;
+    private int guess;
+    private int guessCount = 0;
+    private int pickedNumber;
 
     // Start is called before the first frame update
     void Start()
     {
         WelcomeMessage();
+        TakeNumber();
+        MakeGuess();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            Debug.Log("You pressed Up, which means Higher.");
+            Higher();
 		}
 
 		else if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            Debug.Log("You pressed Down, which means Lower.");
+            Lower();
         }
 
         else if (Input.GetKeyDown(KeyCode.Return)) {
-            Debug.Log("Happy to have guessed right.");
-			Debug.Log("Press Enter again, for another round.");
+            Correct();
         }
     }
 
     private void WelcomeMessage() {
         Debug.Log("Welcome to Number Wizard!");
+
+    }
+
+	private void TakeNumber() {
         Debug.Log("Please pick a number between");
         Debug.Log("Minimally " + minNumber + " and");
         Debug.Log("Maximally " + maxNumber + ":");
-        Debug.Log("Tell me if your number is higher or lower then 500.");
+
+    }
+
+	private void MakeGuess() {
+        guessCount++;
+        CalculateGuess();
+        Debug.Log("My guess number " + guessCount + " is: " + guess);
+        Debug.Log("Is your number higher or lower?");
         Debug.Log("Press Up = Higer, Press Down = Lower, Enter = Correct.");
+    }
+
+	private void CalculateGuess() {
+        guess = (minNumber + maxNumber) / 2;
+	}
+
+	private void Higher() {
+        Debug.Log("You pressed Up, which means Higher.");
+        minNumber = guess;
+        MakeGuess();
+    }
+
+	private void Lower() {
+        Debug.Log("You pressed Down, which means Lower.");
+        maxNumber = guess;
+        MakeGuess();
+    }
+
+	private void Correct() {
+        Debug.Log("============================");
+        Debug.Log("Happy to have guessed right.");
+        Debug.Log("============================");
+
+        minNumber = 1;
+        maxNumber = 1000;
+        TakeNumber();
     }
 }
